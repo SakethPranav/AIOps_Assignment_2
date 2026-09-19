@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    image: spam-api:redis
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=cache
+      - CACHE_TTL_SECONDS=300
+    depends_on:
+      - cache
+
+  cache:
+    image: redis:7-alpine
